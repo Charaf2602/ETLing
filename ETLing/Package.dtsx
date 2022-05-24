@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="5"
-  DTS:VersionGUID="{27439709-59DE-4C40-BC32-2F59F5623DAC}">
+  DTS:VersionBuild="11"
+  DTS:VersionGUID="{95BC12BC-BE52-471E-BE29-2ACCEF151F32}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -45,7 +45,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{E28C231A-3AED-47B0-BC42-7E10BFA5CE14}"
-          SQLTask:SqlStatementSource="USE [dw_ETL1]&#xA;GO&#xA;&#xA;&#xA;SET ANSI_NULLS ON&#xA;GO&#xA;&#xA;SET QUOTED_IDENTIFIER ON&#xA;GO&#xA;&#xA;CREATE TABLE [dbo].[Dim_Github](&#xA;&#x9;[Nbr_repos] [int] NULL,&#xA;&#x9;[Nbr_issues] [int] NULL,&#xA;&#x9;[Nbr_Prs] [int] NULL,&#xA;&#x9;[Id_lang] [int] NOT NULL,&#xA;&#x9;[Id_GB] [int] NOT NULL,&#xA; CONSTRAINT [PK_Dim_Github] PRIMARY KEY CLUSTERED &#xA;(&#xA;&#x9;[Id_GB] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;) ON [PRIMARY]&#xA;GO&#xA;&#xA;ALTER TABLE [dbo].[Dim_Github]  WITH CHECK ADD  CONSTRAINT [FK_Dim_Github_Dim_Lang] FOREIGN KEY([Id_lang])&#xA;REFERENCES [dbo].[Dim_Lang] ([Id_lang])&#xA;GO&#xA;&#xA;ALTER TABLE [dbo].[Dim_Github] CHECK CONSTRAINT [FK_Dim_Github_Dim_Lang]&#xA;GO&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="USE [dw_ETL1]&#xA;GO&#xA;&#xA;&#xA;SET ANSI_NULLS ON&#xA;GO&#xA;&#xA;SET QUOTED_IDENTIFIER ON&#xA;GO&#xA;if not exists(SELECT * FROM sys.tables&#xA;WHERE name = N'Dim_Github')&#xA;BEGIN&#xA;CREATE TABLE [dbo].[Dim_Github](&#xA;&#x9;[Nbr_repos] [int] NULL,&#xA;&#x9;[Nbr_issues] [int] NULL,&#xA;&#x9;[Nbr_Prs] [int] NULL,&#xA;&#x9;[Id_lang] [int] NOT NULL,&#xA;&#x9;[Id_GB] [int] NOT NULL,&#xA; CONSTRAINT [PK_Dim_Github] PRIMARY KEY CLUSTERED &#xA;(&#xA;&#x9;[Id_GB] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;) ON [PRIMARY];&#xA;&#xA;ALTER TABLE [dbo].[Dim_Github]  WITH CHECK ADD  CONSTRAINT [FK_Dim_Github_Dim_Lang] FOREIGN KEY([Id_lang])&#xA;REFERENCES [dbo].[Dim_Lang] ([Id_lang]);&#xA;&#xA;ALTER TABLE [dbo].[Dim_Github] CHECK CONSTRAINT [FK_Dim_Github_Dim_Lang];&#xA;&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -62,7 +62,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{E28C231A-3AED-47B0-BC42-7E10BFA5CE14}"
-          SQLTask:SqlStatementSource="USE [dw_ETL1]&#xA;GO&#xA;&#xA;SET ANSI_NULLS ON&#xA;GO&#xA;&#xA;SET QUOTED_IDENTIFIER ON&#xA;GO&#xA;&#xA;CREATE TABLE [dbo].[Dim_Lang](&#xA;&#x9;[Id_lang] [int] NOT NULL,&#xA;&#x9;[Nom] [nvarchar](max) NULL,&#xA; CONSTRAINT [PK_Dim_Lang] PRIMARY KEY CLUSTERED &#xA;(&#xA;&#x9;[Id_lang] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="USE [dw_ETL1]&#xA;GO&#xA;&#xA;SET ANSI_NULLS ON&#xA;GO&#xA;&#xA;SET QUOTED_IDENTIFIER ON&#xA;GO&#xA;if not exists(SELECT * FROM sys.tables&#xA;WHERE name = N'Dim_Lang')&#xA;BEGIN&#xA;CREATE TABLE [dbo].[Dim_Lang](&#xA;&#x9;[Id_lang] [int] NOT NULL,&#xA;&#x9;[Nom] [nvarchar](max) NULL,&#xA; CONSTRAINT [PK_Dim_Lang] PRIMARY KEY CLUSTERED &#xA;(&#xA;&#x9;[Id_lang] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY];&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -79,7 +79,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{E28C231A-3AED-47B0-BC42-7E10BFA5CE14}"
-          SQLTask:SqlStatementSource="USE [dw_ETL1]&#xA;GO&#xA;&#xA;&#xA;SET ANSI_NULLS ON&#xA;GO&#xA;&#xA;SET QUOTED_IDENTIFIER ON&#xA;GO&#xA;&#xA;CREATE TABLE [dbo].[Dim_temps](&#xA;&#x9;[Annee] [int] NOT NULL,&#xA;&#x9;[Semestre] [nvarchar](max) NULL,&#xA; CONSTRAINT [PK_Dim_temps] PRIMARY KEY CLUSTERED &#xA;(&#xA;&#x9;[Annee] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="USE [dw_ETL1]&#xA;GO&#xA;&#xA;&#xA;SET ANSI_NULLS ON&#xA;GO&#xA;&#xA;SET QUOTED_IDENTIFIER ON&#xA;GO&#xA;if not exists(SELECT * FROM sys.tables&#xA;WHERE name = N'Dim_temps')&#xA;BEGIN&#xA;CREATE TABLE [dbo].[Dim_temps](&#xA;&#x9;[Annee] [int] NOT NULL,&#xA;&#x9;[Semestre] [nvarchar](max) NULL,&#xA; CONSTRAINT [PK_Dim_temps] PRIMARY KEY CLUSTERED &#xA;(&#xA;&#x9;[Annee] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY];&#xA;&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -108,12 +108,29 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Create Fact_lang"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E28C231A-3AED-47B0-BC42-7E10BFA5CE14}"
+          SQLTask:SqlStatementSource="USE [dw_ETL1]&#xA;GO&#xA;&#xA;SET ANSI_NULLS ON&#xA;GO&#xA;&#xA;SET QUOTED_IDENTIFIER ON&#xA;GO&#xA;if not exists(SELECT * FROM sys.tables&#xA;WHERE name = N'Fact_Lang_Usage')&#xA;BEGIN&#xA;CREATE TABLE [dbo].[Fact_Lang_Usage](&#xA;&#x9;[Id_lang] [int] NOT NULL,&#xA;&#x9;[Nbr_posts] [int] NULL,&#xA;&#x9;[Nbr_views] [int] NULL,&#xA;&#x9;[Nbr_answers] [int] NULL,&#xA;&#x9;[Nbr_comments] [int] NULL,&#xA;&#x9;[Nbr_Favourites] [int] NULL,&#xA;&#x9;[Annee] [int] NOT NULL,&#xA;&#x9;[Id_GB] [int] NOT NULL&#xA;) ON [PRIMARY];&#xA;&#xA;ALTER TABLE [dbo].[Fact_Lang_Usage]  WITH CHECK ADD  CONSTRAINT [FK_Fact_Lang_Usage_Dim_Github] FOREIGN KEY([Id_GB])&#xA;REFERENCES [dbo].[Dim_Github] ([Id_GB]);&#xA;&#xA;ALTER TABLE [dbo].[Fact_Lang_Usage] CHECK CONSTRAINT [FK_Fact_Lang_Usage_Dim_Github];&#xA;&#xA;ALTER TABLE [dbo].[Fact_Lang_Usage]  WITH CHECK ADD  CONSTRAINT [FK_Fact_Lang_Usage_Dim_Lang] FOREIGN KEY([Id_lang])&#xA;REFERENCES [dbo].[Dim_Lang] ([Id_lang]);&#xA;&#xA;ALTER TABLE [dbo].[Fact_Lang_Usage] CHECK CONSTRAINT [FK_Fact_Lang_Usage_Dim_Lang];&#xA;&#xA;ALTER TABLE [dbo].[Fact_Lang_Usage]  WITH CHECK ADD  CONSTRAINT [FK_Fact_Lang_Usage_Dim_temps] FOREIGN KEY([Annee])&#xA;REFERENCES [dbo].[Dim_temps] ([Annee]);&#xA;&#xA;ALTER TABLE [dbo].[Fact_Lang_Usage] CHECK CONSTRAINT [FK_Fact_Lang_Usage_Dim_temps];&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Staging DB"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{8E955931-9A89-453D-804C-F67BE1F52F8E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Staging DB"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="2">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{E28C231A-3AED-47B0-BC42-7E10BFA5CE14}"
-          SQLTask:SqlStatementSource="USE [dw_ETL1]&#xA;GO&#xA;&#xA;SET ANSI_NULLS ON&#xA;GO&#xA;&#xA;SET QUOTED_IDENTIFIER ON&#xA;GO&#xA;&#xA;CREATE TABLE [dbo].[Fact_Lang_Usage](&#xA;&#x9;[Id_lang] [int] NOT NULL,&#xA;&#x9;[Nbr_posts] [int] NULL,&#xA;&#x9;[Nbr_views] [int] NULL,&#xA;&#x9;[Nbr_answers] [int] NULL,&#xA;&#x9;[Nbr_comments] [int] NULL,&#xA;&#x9;[Nbr_Favourites] [int] NULL,&#xA;&#x9;[Annee] [int] NOT NULL,&#xA;&#x9;[Id_GB] [int] NOT NULL&#xA;) ON [PRIMARY]&#xA;GO&#xA;&#xA;ALTER TABLE [dbo].[Fact_Lang_Usage]  WITH CHECK ADD  CONSTRAINT [FK_Fact_Lang_Usage_Dim_Github] FOREIGN KEY([Id_GB])&#xA;REFERENCES [dbo].[Dim_Github] ([Id_GB])&#xA;GO&#xA;&#xA;ALTER TABLE [dbo].[Fact_Lang_Usage] CHECK CONSTRAINT [FK_Fact_Lang_Usage_Dim_Github]&#xA;GO&#xA;&#xA;ALTER TABLE [dbo].[Fact_Lang_Usage]  WITH CHECK ADD  CONSTRAINT [FK_Fact_Lang_Usage_Dim_Lang] FOREIGN KEY([Id_lang])&#xA;REFERENCES [dbo].[Dim_Lang] ([Id_lang])&#xA;GO&#xA;&#xA;ALTER TABLE [dbo].[Fact_Lang_Usage] CHECK CONSTRAINT [FK_Fact_Lang_Usage_Dim_Lang]&#xA;GO&#xA;&#xA;ALTER TABLE [dbo].[Fact_Lang_Usage]  WITH CHECK ADD  CONSTRAINT [FK_Fact_Lang_Usage_Dim_temps] FOREIGN KEY([Annee])&#xA;REFERENCES [dbo].[Dim_temps] ([Annee])&#xA;GO&#xA;&#xA;ALTER TABLE [dbo].[Fact_Lang_Usage] CHECK CONSTRAINT [FK_Fact_Lang_Usage_Dim_temps]&#xA;GO&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="if not exists(select * from sys.databases where name = 'db_Staging')  create database db_Staging" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -129,8 +146,8 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
-      DTS:DTSID="{49BC25B8-64E2-4B62-8551-617483BD58FF}"
-      DTS:From="Package\Create DW"
+      DTS:DTSID="{6586F44F-CB18-419D-9BB3-9DDDF3551550}"
+      DTS:From="Package\Create Dim_Github"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
       DTS:To="Package\Create Fact_lang" />
@@ -150,6 +167,14 @@
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
       DTS:To="Package\Create Dim_lang" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{C3530A44-23DD-4875-AD15-DAAB297813E0}"
+      DTS:From="Package\Create DW"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Staging DB" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -164,55 +189,25 @@
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="133,42"
-          Id="Package\Create DW"
-          TopLeft="475,52" />
-        <NodeLayout
           Size="173,42"
           Id="Package\Create Dim_Github"
-          TopLeft="837,303" />
+          TopLeft="618,262" />
         <NodeLayout
           Size="161,42"
           Id="Package\Create Dim_lang"
-          TopLeft="811,141" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="572.75,94">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="318.75,47"
-              Start="0,0"
-              End="318.75,39.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,12.2825552825553" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,12.2825552825553"
-                    Point2="0,16.2825552825553"
-                    Point3="4,16.2825552825553" />
-                  <mssgle:LineSegment
-                    End="314.75,16.2825552825553" />
-                  <mssgle:CubicBezierSegment
-                    Point1="314.75,16.2825552825553"
-                    Point2="318.75,16.2825552825553"
-                    Point3="318.75,20.2825552825553" />
-                  <mssgle:LineSegment
-                    End="318.75,39.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          TopLeft="614,176" />
         <NodeLayout
           Size="175,42"
           Id="Package\Create DIM_Temps"
           TopLeft="165,163" />
+        <NodeLayout
+          Size="133,42"
+          Id="Package\Create DW"
+          TopLeft="475,52" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Create Fact_lang"
+          TopLeft="622,359" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="541.5,94">
@@ -247,36 +242,20 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="163,42"
-          Id="Package\Create Fact_lang"
-          TopLeft="511,178" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="562.333333333333,94">
+          TopLeft="704,304">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="30.1666666666666,84"
+              EndConnector="0,55"
               Start="0,0"
-              End="30.1666666666666,76.5">
+              End="0,47.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,30.1991084695394" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,30.1991084695394"
-                    Point2="0,34.1991084695394"
-                    Point3="4,34.1991084695394" />
-                  <mssgle:LineSegment
-                    End="26.1666666666666,34.1991084695394" />
-                  <mssgle:CubicBezierSegment
-                    Point1="26.1666666666666,34.1991084695394"
-                    Point2="30.1666666666666,34.1991084695394"
-                    Point3="30.1666666666666,38.1991084695394" />
-                  <mssgle:LineSegment
-                    End="30.1666666666666,76.5" />
+                    End="0,47.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -287,30 +266,102 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="891.5,183">
+          TopLeft="694.5,218">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="32,120"
+              EndConnector="10,44"
               Start="0,0"
-              End="32,112.5">
+              End="10,36.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,56" />
+                    End="0,18" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,56"
-                    Point2="0,60"
-                    Point3="4,60" />
+                    Point1="0,18"
+                    Point2="0,22"
+                    Point3="4,22" />
                   <mssgle:LineSegment
-                    End="28,60" />
+                    End="6,22" />
                   <mssgle:CubicBezierSegment
-                    Point1="28,60"
-                    Point2="32,60"
-                    Point3="32,64" />
+                    Point1="6,22"
+                    Point2="10,22"
+                    Point3="10,26" />
                   <mssgle:LineSegment
-                    End="32,112.5" />
+                    End="10,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="562.333333333333,94">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="132.166666666667,82"
+              Start="0,0"
+              End="132.166666666667,74.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.3848439821694" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.3848439821694"
+                    Point2="0,33.3848439821694"
+                    Point3="4,33.3848439821694" />
+                  <mssgle:LineSegment
+                    End="128.166666666667,33.3848439821694" />
+                  <mssgle:CubicBezierSegment
+                    Point1="128.166666666667,33.3848439821694"
+                    Point2="132.166666666667,33.3848439821694"
+                    Point3="132.166666666667,37.3848439821694" />
+                  <mssgle:LineSegment
+                    End="132.166666666667,74.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="135,42"
+          Id="Package\Staging DB"
+          TopLeft="892,91" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="608,73">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="284,39"
+              Start="0,0"
+              End="276.5,39">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="138,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="138,0"
+                    Point2="142,0"
+                    Point3="142,4" />
+                  <mssgle:LineSegment
+                    End="142,35" />
+                  <mssgle:CubicBezierSegment
+                    Point1="142,35"
+                    Point2="142,39"
+                    Point3="146,39" />
+                  <mssgle:LineSegment
+                    End="276.5,39" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
